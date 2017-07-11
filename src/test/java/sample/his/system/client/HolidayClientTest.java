@@ -34,8 +34,9 @@ public class HolidayClientTest {
     @Test
     public void getHolidayInformationReturnsValidResponse(){
         // GIVEN
-        HolidayInformationRequest request = new HolidayInformationRequest()
-                .setCountryCode("PL").setYear("2000").setDay("01").setMonth("12").setUpcoming(true);
+        HolidayInformationRequest request = HolidayInformationRequest.builder()
+                .setApiKey("abc-def-xyz")
+                .setCountryCode("PL").setYear("2000").setDay("01").setMonth("12").setUpcoming(true).build();
 
         client.setAddress("http://abc.def.com");
         client.setApiKey("abc-def-xyz");

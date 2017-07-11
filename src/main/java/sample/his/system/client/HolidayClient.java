@@ -55,7 +55,7 @@ public class HolidayClient implements HolidayClientInterface {
         logger.debug(uriString.toString());
 
         return restOperations.getForObject(uriString.toString(), HolidayInformationResponse.class,
-                request.getApiKey(), request.getCountryCode(), request.getYear(), request.getMonth(), request.getDay());
+                request.apiKey(), request.countryCode(), request.year(), request.month(), request.day());
 
     }
 
@@ -88,12 +88,12 @@ public class HolidayClient implements HolidayClientInterface {
 
     private HolidayInformationResponse getNextHoliday(String countryCode, LocalDate date) {
 
-        return this.getHolidayInformation(new HolidayInformationRequest()
+        return this.getHolidayInformation(HolidayInformationRequest.builder()
                 .setApiKey(apiKey)
                 .setCountryCode(countryCode)
                 .setYear(Integer.toString(date.getYear()))
                 .setMonth(Integer.toString(date.getMonthValue()))
                 .setDay(Integer.toString(date.getDayOfMonth()))
-                .setUpcoming(true));
+                .setUpcoming(true).build());
     }
 }

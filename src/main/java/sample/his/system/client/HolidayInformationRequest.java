@@ -1,71 +1,77 @@
 package sample.his.system.client;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.auto.value.AutoValue;
+
+import javax.validation.constraints.NotNull;
 
 /**
  *
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class HolidayInformationRequest {
+@AutoValue
+@JsonDeserialize(builder = AutoValue_HolidayInformationRequest.Builder.class)
+public abstract class HolidayInformationRequest {
 
-    private String apiKey;
-    private String countryCode;
-    private String year;
-    private String month;
-    private String day;
-    private Boolean upcoming;
-
-    public String getApiKey() {
-        return apiKey;
+    @NotNull
+    public static Builder builder() {
+        return new AutoValue_HolidayInformationRequest.Builder();
     }
 
-    public HolidayInformationRequest setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
+
+    @NotNull
+    @JsonProperty("apiKey")
+    public abstract String apiKey();
+
+    @NotNull
+    @JsonProperty("countryCode")
+    public abstract String countryCode();
+
+    @NotNull
+    @JsonProperty("year")
+    public abstract String year();
+
+    @NotNull
+    @JsonProperty("month")
+    public abstract String month();
+
+    @NotNull
+    @JsonProperty("day")
+    public abstract String day();
+
+    @NotNull
+    @JsonProperty("upcoming")
+    public abstract Boolean upcoming();
+
+    @AutoValue.Builder
+    public static abstract class Builder {
+
+        @NotNull
+        @JsonProperty("apiKey")
+        public abstract Builder setApiKey(@NotNull String apiKey);
+
+        @NotNull
+        @JsonProperty("countryCode")
+        public abstract Builder setCountryCode(@NotNull String countryCode);
+
+        @NotNull
+        @JsonProperty("year")
+        public abstract Builder setYear(@NotNull String year);
+
+        @NotNull
+        @JsonProperty("month")
+        public abstract Builder setMonth(@NotNull String month);
+
+        @NotNull
+        @JsonProperty("day")
+        public abstract Builder setDay(@NotNull String day);
+
+        @NotNull
+        @JsonProperty("upcoming")
+        public abstract Builder setUpcoming(@NotNull Boolean upcoming);
+
+        @NotNull
+        public abstract HolidayInformationRequest build();
     }
 
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public HolidayInformationRequest setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-        return this;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public HolidayInformationRequest setYear(String year) {
-        this.year = year;
-        return this;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public HolidayInformationRequest setMonth(String month) {
-        this.month = month;
-        return this;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public HolidayInformationRequest setDay(String day) {
-        this.day = day;
-        return this;
-    }
-
-    public Boolean getUpcoming() {
-        return upcoming;
-    }
-
-    public HolidayInformationRequest setUpcoming(Boolean upcoming) {
-        this.upcoming = upcoming;
-        return this;
-    }
 }
