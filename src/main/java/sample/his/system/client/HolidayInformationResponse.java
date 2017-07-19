@@ -1,32 +1,44 @@
 package sample.his.system.client;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.auto.value.AutoValue;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
  *
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class HolidayInformationResponse {
-    private Integer status;
-    private List<Holiday> holidays;
+@AutoValue
+@JsonDeserialize(builder = AutoValue_HolidayInformationResponse.Builder.class)
+public abstract class HolidayInformationResponse {
 
-    public Integer getStatus() {
-        return status;
+    @NotNull
+    public static Builder builder() {
+        return new AutoValue_HolidayInformationResponse.Builder();
     }
 
-    public HolidayInformationResponse setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
+    @NotNull
+    @JsonProperty("status")
+    public abstract Integer status();
 
-    public List<Holiday> getHolidays() {
-        return holidays;
-    }
+    @NotNull
+    @JsonProperty("holidays")
+    public abstract List<Holiday> holidays();
 
-    public HolidayInformationResponse setHolidays(List<Holiday> holidays) {
-        this.holidays = holidays;
-        return this;
+    @AutoValue.Builder
+    public static abstract class Builder {
+
+        @NotNull
+        @JsonProperty("status")
+        public abstract Builder setStatus(@NotNull Integer status);
+
+        @NotNull
+        @JsonProperty("holidays")
+        public abstract Builder setHolidays(@NotNull List<Holiday> holidays);
+
+        @NotNull
+        public abstract HolidayInformationResponse build();
     }
 }

@@ -27,25 +27,13 @@ public class HolidayUtilsTest {
         HolidayUtils.holidayInThisSameDay(firstHoliday, secondHoliday);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void holidayInThisSameDayWithNullHolidayList() {
-        // GIVEN
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS);
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS);
-
-        // WHEN
-        HolidayUtils.holidayInThisSameDay(firstHoliday, secondHoliday);
-    }
-
     @Test
     public void holidayInThisSameDayWithNotOKStatusReturnsEmptyValue() {
         // GIVEN
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(INVALID_STATUS).setHolidays(Collections.emptyList());
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(INVALID_STATUS).setHolidays(Collections.emptyList());
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder().setStatus(INVALID_STATUS)
+                .setHolidays(Collections.emptyList()).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(INVALID_STATUS).setHolidays(Collections.emptyList()).build();
 
         // WHEN
         HolidayInformation result = HolidayUtils.holidayInThisSameDay(firstHoliday, secondHoliday);
@@ -62,10 +50,10 @@ public class HolidayUtilsTest {
                 .setObserved("2014-01-01").setPublic(true);
         final Holiday SECOND_HOLIDAY = new Holiday().setDate("2015-01-01").setName("second Holiday")
                 .setObserved("2015-01-01").setPublic(false);
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY));
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY));
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY)).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY)).build();
 
         // WHEN
         HolidayInformation result = HolidayUtils.holidayInThisSameDay(firstHoliday, secondHoliday);
@@ -85,10 +73,10 @@ public class HolidayUtilsTest {
                 .setObserved(DATE).setPublic(true);
         final Holiday SECOND_HOLIDAY = new Holiday().setDate(DATE).setName(SECOND_HOLIDAY_NAME)
                 .setObserved(DATE).setPublic(false);
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY));
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY));
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY)).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY)).build();
 
         // WHEN
         HolidayInformation result = HolidayUtils.holidayInThisSameDay(firstHoliday, secondHoliday);
@@ -113,13 +101,13 @@ public class HolidayUtilsTest {
         HolidayUtils.findEarlierDate(firstHoliday, secondHoliday);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void findEarlierDateWithNullHolidayList() throws IllegalArgumentException {
         // GIVEN
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS);
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS);
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.emptyList()).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.emptyList()).build();
 
         // WHEN
         HolidayUtils.findEarlierDate(firstHoliday, secondHoliday);
@@ -128,10 +116,10 @@ public class HolidayUtilsTest {
     @Test(expected = IllegalArgumentException.class)
     public void findEarlierDateWithNotOKStatusThrowsInvalidArgumentException() throws IllegalArgumentException {
         // GIVEN
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(INVALID_STATUS).setHolidays(Collections.emptyList());
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(INVALID_STATUS).setHolidays(Collections.emptyList());
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(INVALID_STATUS).setHolidays(Collections.emptyList()).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(INVALID_STATUS).setHolidays(Collections.emptyList()).build();
 
         // WHEN
         HolidayUtils.findEarlierDate(firstHoliday, secondHoliday);
@@ -147,10 +135,10 @@ public class HolidayUtilsTest {
                 .setObserved(DATE).setPublic(true);
         final Holiday SECOND_HOLIDAY = new Holiday().setDate(DATE).setName(SECOND_HOLIDAY_NAME)
                 .setObserved(DATE).setPublic(false);
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY));
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY));
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY)).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY)).build();
 
         // WHEN
         LocalDate result = HolidayUtils.findEarlierDate(firstHoliday, secondHoliday);
@@ -172,10 +160,10 @@ public class HolidayUtilsTest {
                 .setObserved(FIRST_DATE).setPublic(true);
         final Holiday SECOND_HOLIDAY = new Holiday().setDate(SECOND_DATE).setName(SECOND_HOLIDAY_NAME)
                 .setObserved(SECOND_DATE).setPublic(false);
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY));
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY));
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY)).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY)).build();
 
         // WHEN
         LocalDate result = HolidayUtils.findEarlierDate(firstHoliday, secondHoliday);
@@ -197,10 +185,10 @@ public class HolidayUtilsTest {
                 .setObserved(FIRST_DATE).setPublic(true);
         final Holiday SECOND_HOLIDAY = new Holiday().setDate(SECOND_DATE).setName(SECOND_HOLIDAY_NAME)
                 .setObserved(SECOND_DATE).setPublic(false);
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY));
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY));
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(FIRST_HOLIDAY)).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.singletonList(SECOND_HOLIDAY)).build();
 
         // WHEN
         LocalDate result = HolidayUtils.findEarlierDate(firstHoliday, secondHoliday);
@@ -214,10 +202,10 @@ public class HolidayUtilsTest {
     @Test(expected = IllegalArgumentException.class)
     public void findEarlierDateWithNullHolidayInCollection() throws IllegalArgumentException {
         // GIVEN
-        HolidayInformationResponse firstHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.emptyList());
-        HolidayInformationResponse secondHoliday = new HolidayInformationResponse()
-                .setStatus(OK_STATUS).setHolidays(Collections.emptyList());
+        HolidayInformationResponse firstHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.emptyList()).build();
+        HolidayInformationResponse secondHoliday = HolidayInformationResponse.builder()
+                .setStatus(OK_STATUS).setHolidays(Collections.emptyList()).build();
 
         // WHEN
         HolidayUtils.findEarlierDate(firstHoliday, secondHoliday);

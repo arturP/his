@@ -18,9 +18,9 @@ public class HolidayUtils {
 
         checkInputValues(first, second);
 
-        if (OK_VALUE.equals(first.getStatus()) && OK_VALUE.equals(second.getStatus())) {
-            for (Holiday firstInfo : first.getHolidays()) {
-                for (Holiday secondInfo : second.getHolidays()) {
+        if (OK_VALUE.equals(first.status()) && OK_VALUE.equals(second.status())) {
+            for (Holiday firstInfo : first.holidays()) {
+                for (Holiday secondInfo : second.holidays()) {
                     if (firstInfo.getDate().equals(secondInfo.getDate())) {
                         return new HolidayInformation().setDate(LocalDate.parse(firstInfo.getDate()))
                                 .setName1(firstInfo.getName())
@@ -37,7 +37,7 @@ public class HolidayUtils {
 
         checkInputValues(first, second);
 
-        if ((!(OK_VALUE.equals(first.getStatus()))) || (!(OK_VALUE.equals(second.getStatus())))) {
+        if ((!(OK_VALUE.equals(first.status()))) || (!(OK_VALUE.equals(second.status())))) {
             throw new IllegalArgumentException("Status is different then expected!");
         }
 
@@ -55,11 +55,11 @@ public class HolidayUtils {
             throw new NullPointerException(NULL_PARAMETER_ERROR_MESSAGE);
         }
 
-        if (first.getHolidays() == null || second.getHolidays() == null) {
+        if (first.holidays() == null || second.holidays() == null) {
             throw new NullPointerException(NULL_LIST_ERROR_MESSAGE);
         }
 
-        if (first.getStatus() == null || second.getStatus() == null) {
+        if (first.status() == null || second.status() == null) {
             throw new NullPointerException(NULL_STATUS_ERROR_MESSAGE);
         }
     }
@@ -68,7 +68,7 @@ public class HolidayUtils {
 
         LocalDate earliestDate = initDate;
 
-        for (Holiday holiday : holidayInformationResponse.getHolidays()) {
+        for (Holiday holiday : holidayInformationResponse.holidays()) {
             if (holiday != null) {
                 LocalDate holidayDate = LocalDate.parse(holiday.getDate());
                 if (holidayDate.isBefore(earliestDate)) {

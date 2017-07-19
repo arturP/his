@@ -44,7 +44,8 @@ public class HolidayClientTest {
 
         Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.any(), Mockito.anyString(),
                 Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString()))
-                .thenReturn(new HolidayInformationResponse());
+                .thenReturn(HolidayInformationResponse.builder().setStatus(200)
+                        .setHolidays(Collections.emptyList()).build());
 
         // WHEN
         HolidayInformationResponse response = client.getHolidayInformation(request);
@@ -75,12 +76,12 @@ public class HolidayClientTest {
 
         Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.any(), Mockito.anyString(),
                 eq(FIRST_COUNTRY_CODE), Mockito.anyString(), Mockito.anyString(), Mockito.anyString()))
-                .thenReturn(new HolidayInformationResponse().setStatus(OK_STATUS)
-                .setHolidays(Collections.singletonList(FIRST_HOLIDAY)));
+                .thenReturn(HolidayInformationResponse.builder().setStatus(OK_STATUS)
+                .setHolidays(Collections.singletonList(FIRST_HOLIDAY)).build());
         Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.any(), Mockito.anyString(),
                 eq(SECOND_COUNTRY_CODE), Mockito.anyString(), Mockito.anyString(), Mockito.anyString()))
-                .thenReturn(new HolidayInformationResponse().setStatus(OK_STATUS)
-                        .setHolidays(Collections.singletonList(SECOND_HOLIDAY)));
+                .thenReturn(HolidayInformationResponse.builder().setStatus(OK_STATUS)
+                        .setHolidays(Collections.singletonList(SECOND_HOLIDAY)).build());
 
         // WHEN
         HolidayInformation result = client.findHolidayForCountries(FIRST_COUNTRY_CODE, SECOND_COUNTRY_CODE, date);
@@ -121,20 +122,20 @@ public class HolidayClientTest {
 
         Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.any(), Mockito.anyString(),
                 eq(FIRST_COUNTRY_CODE), eq("2016"), eq("1"), eq("1")))
-                .thenReturn(new HolidayInformationResponse().setStatus(OK_STATUS)
-                        .setHolidays(Collections.singletonList(FIRST_HOLIDAY)));
+                .thenReturn(HolidayInformationResponse.builder().setStatus(OK_STATUS)
+                        .setHolidays(Collections.singletonList(FIRST_HOLIDAY)).build());
         Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.any(), Mockito.anyString(),
                 eq(SECOND_COUNTRY_CODE), eq("2016"), eq("1"), eq("1")))
-                .thenReturn(new HolidayInformationResponse().setStatus(OK_STATUS)
-                        .setHolidays(Collections.singletonList(SECOND_HOLIDAY)));
+                .thenReturn(HolidayInformationResponse.builder().setStatus(OK_STATUS)
+                        .setHolidays(Collections.singletonList(SECOND_HOLIDAY)).build());
         Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.any(), Mockito.anyString(),
                 eq(FIRST_COUNTRY_CODE), eq("2016"), eq("1"), eq("5")))
-                .thenReturn(new HolidayInformationResponse().setStatus(OK_STATUS)
-                        .setHolidays(Collections.singletonList(THIRD_HOLIDAY)));
+                .thenReturn(HolidayInformationResponse.builder().setStatus(OK_STATUS)
+                        .setHolidays(Collections.singletonList(THIRD_HOLIDAY)).build());
         Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.any(), Mockito.anyString(),
                 eq(SECOND_COUNTRY_CODE), eq("2016"), eq("1"), eq("5")))
-                .thenReturn(new HolidayInformationResponse().setStatus(OK_STATUS)
-                        .setHolidays(Collections.singletonList(FOURTH_HOLIDAY)));
+                .thenReturn(HolidayInformationResponse.builder().setStatus(OK_STATUS)
+                        .setHolidays(Collections.singletonList(FOURTH_HOLIDAY)).build());
 
         // WHEN
         HolidayInformation result = client.findHolidayForCountries(FIRST_COUNTRY_CODE, SECOND_COUNTRY_CODE, date);
